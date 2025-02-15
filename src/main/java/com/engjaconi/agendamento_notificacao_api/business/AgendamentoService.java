@@ -3,6 +3,7 @@ package com.engjaconi.agendamento_notificacao_api.business;
 import com.engjaconi.agendamento_notificacao_api.business.mapper.AgendamentoMapper;
 import com.engjaconi.agendamento_notificacao_api.controller.dto.in.AgendamentoRecordInDto;
 import com.engjaconi.agendamento_notificacao_api.controller.dto.out.AgendamentoRecordOutDto;
+import com.engjaconi.agendamento_notificacao_api.infrastructure.exceptions.NotFoundException;
 import com.engjaconi.agendamento_notificacao_api.infrastructure.repositories.AgendamentoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,12 @@ public class AgendamentoService {
                         agendamentoMapper.paraEntity(agendamentoRecordInDto)
                 )
         );
+    }
+
+    public AgendamentoRecordOutDto buscarAgendamentoPorId(Long id) {
+        return agendamentoMapper.paraOutDto(
+            agendamentoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Id não encontrado")));
     }
 
 }
