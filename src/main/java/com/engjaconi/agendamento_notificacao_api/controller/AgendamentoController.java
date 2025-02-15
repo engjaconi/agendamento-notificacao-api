@@ -35,7 +35,7 @@ public class AgendamentoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> cancelarAgendamento(@PathVariable("id") Long id) {
-        agendamentoService.cancalarAgendamento(id);
+        agendamentoService.cancelarAgendamento(id);
         return ResponseEntity.accepted().build();
     }
 

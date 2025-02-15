@@ -33,7 +33,7 @@ public class AgendamentoService {
                 .orElseThrow(() -> new NotFoundException("Id não encontrado")));
     }
 
-    public void cancalarAgendamento(Long id) {
+    public void cancelarAgendamento(Long id) {
         Agendamento agendamento = agendamentoRepository.findById(id).orElseThrow(
             () -> new NotFoundException("Id não encontrado")
         );
