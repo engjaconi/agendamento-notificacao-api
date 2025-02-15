@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import com.engjaconi.agendamento_notificacao_api.infrastructure.entities.Agendamento;
+
 @RequiredArgsConstructor
 @Service
 public class AgendamentoService {
@@ -29,6 +31,16 @@ public class AgendamentoService {
         return agendamentoMapper.paraOutDto(
             agendamentoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Id não encontrado")));
+    }
+
+    public void cancalarAgendamento(Long id) {
+        Agendamento agendamento = agendamentoRepository.findById(id).orElseThrow(
+            () -> new NotFoundException("Id não encontrado")
+        );
+
+        agendamentoRepository.save(
+            agendamentoMapper.paraEntityCancelamento(agendamento)
+        );
     }
 
 }
